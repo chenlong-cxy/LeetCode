@@ -71,37 +71,39 @@ public:
 		if (num1 == "0" || num2 == "0")
 			return "0";
 		int m = num1.size(), n = num2.size();
-		vector<int> arr(m + n, 0);
+		vector<int> arr(m + n, 0); //开辟数组arr的大小为m+n，并且全部初始化为0
 		for (int i = n - 1; i >= 0; i--) //取乘数的每一位
 		{
 			int a = num2[i] - '0';
 			for (int j = m - 1; j >= 0; j--) //取被乘数的每一位
 			{
 				int b = num1[j] - '0';
-				arr[i + j + 1] += a*b; //将结果
+				arr[i + j + 1] += a*b; //乘数的第i位与被乘数的第j位相乘后的结果放在数组arr中下标为i+j+1的位置
 			}
 		}
+		//从后往前对数组arr进行进位操作
 		int end = m + n - 1;
 		while (end > 0)
 		{
-			arr[end - 1] += arr[end] / 10;
-			arr[end] %= 10;
-			end--;
+			arr[end - 1] += arr[end] / 10; //进位
+			arr[end] %= 10; //当前位进位后的数
+			end--; //从后往前进行迭代
 		}
-		int flag = 1;
+		int flag = 1; //默认有效值从数组arr当中下标为1的位置开始
 		if (arr[0] != 0)
-			flag = 0;
-		string retArr;
+			flag = 0; //若数组arr当中下标为0的位置的数据不为0，则从第0位开始为有效数据
+		string retArr; //相乘后的字符串
+		//依次将数据尾插到字符串retArr当中
 		for (int i = flag; i < m + n; i++)
 		{
-			retArr += arr[i] + '0';
+			retArr.push_back(arr[i] + '0');
 		}
-		return retArr;
+		return retArr; //返回相乘后的字符串
 	}
 };
 
 int main()
 {
-	cout << Solution().multiply("2", "3") << endl;
+	cout << Solution().multiply("123", "456") << endl;
 	return 0;
 }
