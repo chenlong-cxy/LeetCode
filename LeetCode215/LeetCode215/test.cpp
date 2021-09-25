@@ -37,16 +37,18 @@ using namespace std;
 class Solution {
 public:
 	int findKthLargest(vector<int>& nums, int k) {
+		//先用数组当中的前K个元素构建小堆
 		priority_queue<int, vector<int>, greater<int>> q(nums.begin(), nums.begin() + k);
+		//处理数组剩余元素
 		for (size_t i = k; i < nums.size(); i++)
 		{
-			if (nums[i] > q.top())
+			if (nums[i] > q.top()) //若比堆顶元素大
 			{
-				q.pop();
-				q.push(nums[i]);
+				q.pop(); //将堆顶元素弹出
+				q.push(nums[i]); //将该元素入堆
 			}
 		}
-		return q.top();
+		return q.top(); //返回堆顶元素即为数组当中的第K个最大元素
 	}
 };
 
