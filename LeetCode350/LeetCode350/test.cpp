@@ -75,6 +75,39 @@ using namespace std;
 //	}
 //};
 
+//排序+双指针
+class Solution {
+public:
+	vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+		//1、将nums1和nums2分别进行排序
+		sort(nums1.begin(), nums1.end());
+		sort(nums2.begin(), nums2.end());
+		//2、使用双指针找出num1和nums2的交集
+		vector<int> vRet;
+		int len1 = nums1.size(), len2 = nums2.size();
+		int pos1 = 0, pos2 = 0;
+		while (pos1 < len1&&pos2 < len2)
+		{
+			if (nums1[pos1] < nums2[pos2]) //两个指针指向的元素不相等
+			{
+				pos1++; //小的往后走
+			}
+			else if (nums2[pos2] < nums1[pos1]) //两个指针指向的元素不相等
+			{
+				pos2++; //小的往后走
+			}
+			else //两个指针指向的元素相等
+			{
+				vRet.push_back(nums1[pos1]); //该元素属于交集
+				//两个指针一起往后走
+				pos1++;
+				pos2++;
+			}
+		}
+		return vRet;
+	}
+};
+
 //哈希表
 class Solution {
 public:
@@ -107,39 +140,6 @@ public:
 		return vRet;
 	}
 };
-
-//排序+双指针
-//class Solution {
-//public:
-//	vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-//		//1、将nums1和nums2分别进行排序
-//		sort(nums1.begin(), nums1.end());
-//		sort(nums2.begin(), nums2.end());
-//		//2、使用双指针找出num1和nums2的交集
-//		vector<int> vRet;
-//		int len1 = nums1.size(), len2 = nums2.size();
-//		int pos1 = 0, pos2 = 0;
-//		while (pos1 < len1&&pos2 < len2)
-//		{
-//			if (nums1[pos1] < nums2[pos2]) //两个指针指向的元素不相等
-//			{
-//				pos1++; //小的往后走
-//			}
-//			else if (nums2[pos2] < nums1[pos1]) //两个指针指向的元素不相等
-//			{
-//				pos2++; //小的往后走
-//			}
-//			else //两个指针指向的元素相等
-//			{
-//				vRet.push_back(nums1[pos1]); //该元素属于交集
-//				//两个指针一起往后走
-//				pos1++;
-//				pos2++;
-//			}
-//		}
-//		return vRet;
-//	}
-//};
 
 int main()
 {
