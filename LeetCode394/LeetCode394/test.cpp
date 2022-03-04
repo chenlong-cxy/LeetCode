@@ -32,7 +32,7 @@ public:
 		size_t pos = 0; //用于遍历字符串s
 		while (pos < s.size())
 		{
-			//1、遍历到的是数字，先完整的数字字符串提取出来，然后进行压栈
+			//1、遍历到的是数字，先将完整的数字字符串提取出来，然后进行压栈
 			if (isdigit(s[pos]))
 			{
 				string num = GetNum(s, pos);
