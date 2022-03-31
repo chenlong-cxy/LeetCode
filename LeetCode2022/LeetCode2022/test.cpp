@@ -4,49 +4,59 @@ using namespace std;
 class Solution {
 public:
 	vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
-		if (original.size() != m*n)
+		if (original.size() != m*n) //无法构成这样的二维数组
 			return vector<vector<int>>();
-		vector<vector<int>> vv;
-		vector<int> tmp;
-		tmp.resize(n);
+
+		vector<vector<int>> ret; //二维数组
 		size_t index = 0;
 		for (int i = 0; i < m; i++)
 		{
+			vector<int> tmp;
+			tmp.resize(n);
+			//每次从original中取出n个元素放入一维数组tmp中
 			for (int j = 0; j < n; j++)
 			{
 				tmp[j] = original[index];
 				index++;
 			}
-			vv.push_back(tmp);
+			//将一维数组tmp插入到二维数组中
+			ret.push_back(tmp);
 		}
-		return vv;
+		return ret;
 	}
 };
 class Solution {
 public:
 	vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
-		if (original.size() != m*n)
+		if (original.size() != m*n) //无法构成这样的二维数组
 			return vector<vector<int>>();
-		vector<vector<int>> vv;
+
+		vector<vector<int>> ret;
 		for (auto it = original.begin(); it != original.end(); it += n)
 		{
+			//每次从original中获取n个元素的首尾迭代器
+			//用该迭代器范围构造出一个一维数组tmp
 			vector<int> tmp(it, it + n);
-			vv.push_back(tmp);
+			//将一维数组tmp插入到二维数组中
+			ret.push_back(tmp);
 		}
-		return vv;
+		return ret;
 	}
 };
 class Solution {
 public:
 	vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
-		if (original.size() != m*n)
+		if (original.size() != m*n) //无法构成这样的二维数组
 			return vector<vector<int>>();
-		vector<vector<int>> vv;
+
+		vector<vector<int>> ret;
 		for (auto it = original.begin(); it != original.end(); it += n)
 		{
-			vv.emplace_back(it, it + n);
+			//每次从original中获取n个元素的首尾迭代器
+			//利用emplace_back将其插入到二维数组中
+			ret.emplace_back(it, it + n);
 		}
-		return vv;
+		return ret;
 	}
 };
 int main()
