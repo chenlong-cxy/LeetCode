@@ -14,19 +14,19 @@ public:
 		for (const string& word : words)
 		{
 			fill(table.begin(), table.end(), 0); //清空table
-			//统计word中每个字符出现的次数
+			//a、统计word中每个字符出现的次数
 			for (const auto ch : word)
 			{
 				table[ch - 'a']++; //直接定址法
 			}
-			//更新26个字符在各个字符串中出现的最小次数
+			//b、更新26个字符在各个字符串中出现的最小次数
 			for (size_t i = 0; i < 26; i++)
 			{
 				mintable[i] = min(table[i], mintable[i]);
 			}
 		}
 
-		//2、根据mintable构建共用字符数组
+		//2、根据26个字符在各个字符串中出现的最小次数来构建共用字符数组
 		vector<string> ret;
 		for (size_t i = 0; i < 26; i++)
 		{
